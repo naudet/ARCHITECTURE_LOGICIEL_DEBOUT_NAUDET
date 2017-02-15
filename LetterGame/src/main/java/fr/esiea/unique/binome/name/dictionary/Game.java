@@ -1,8 +1,13 @@
 package fr.esiea.unique.binome.name.dictionary;
 
+
 public class Game {
 	
 public static Lettre potCommun[] = new Lettre [25];
+
+Player joueur1 = new Player(false);
+Player joueur2 = new Player(false);
+
 	
 	public static void remplirLePotCommun (Lettre lettre) {
 		int flag=0;
@@ -20,32 +25,84 @@ public static Lettre potCommun[] = new Lettre [25];
 		}
 	}
 	
-	public static void checkTheWordPotCommun(String word) {
+	public static int checkTheWordPotCommun(String word) {
+		word=word.toUpperCase();
 		int length = word.length();
 		int i, j;
+		boolean quit = false;
 		char result;
+		int count = 0;
 		
-		for(i=1; i<length; i++) {
+		for(i=0; i<length; i++) {
+			result = word.charAt(i);
 			for(j=0; j<25; j++) {
-				result = word.charAt(i);
-				//try {
+				
+				try {
 					if(potCommun[j] != null && potCommun[j].letter == result) {
-						if(potCommun[j].nombre == 1) {
+						count ++;
+						//System.out.println("Toutes les lettres du mot ne sont pas contenues dans le pot commun");
+						//quit = true;
+						break;
+						/*if(potCommun[j].nombre == 1) {
 							potCommun[j] = null;
+							break;
 							//potCommun[j].letter = '';
 							//potCommun[j].nombre = 0;
 						}
 						else {
 							potCommun[j].nombre --;
-						}
+							break;
+						}*/
 					}
-				//}
-				/*catch (Exception e) {
+
+				}
+				catch (Exception e) {
 					System.out.println(e.toString());
-				}*/
-				
+				}	
+			}
+			if( quit) {
+				break;
 			}
 		}
+		if(count == length) {
+			return 1;
+		}
+		else {
+			System.out.println("Certaines lettres ne sont pas dans le pot commun");
+			return 0;
+		}
+	}
+	public static void updatePotCommun(String word) {
+		word=word.toUpperCase();
+		int length = word.length();
+		int i, j;
+		char result;
+		
+		
+		for(i=0; i<length; i++) {
+			result = word.charAt(i);
+			for(j=0; j<25; j++) {
+				
+				try {
+					if(potCommun[j] != null && potCommun[j].letter == result) {
+						if(potCommun[j].nombre == 1) {
+							potCommun[j] = null;
+							break;
+		
+						}
+						else {
+							potCommun[j].nombre --;
+							break;
+						}
+					}
+
+				}
+				catch (Exception e) {
+					System.out.println(e.toString());
+				}	
+			}
+		}
+
 	}
 	
 
@@ -69,34 +126,19 @@ public static Lettre potCommun[] = new Lettre [25];
 	}
 	
 	public void jeu() {
-		Player joueur1 = new Player();
-		Player joueur2 = new Player();
-		String fichierPath = "LetterGame/src/main/java/fr/esiea/unique/binome/name/dictionary/dico.txt";
-		Fichier fichier = new Fichier(fichierPath);
 		
-		joueur1.player = 1;
-		joueur2.player = 2;
-		Lettre lettre = new Lettre('n',1);
-		lettre.tableau();
-		String mot = "voiture";
-		mot = mot.toUpperCase();
 		
-		joueur1.lettreDeDepart.letter = lettre.getLetter();
-		joueur2.lettreDeDepart.letter = lettre.getLetter();
-		remplirLePotCommun(joueur1.lettreDeDepart);
-		remplirLePotCommun(joueur2.lettreDeDepart);
 		
-		int tour = lettre.compareLetter(joueur1.lettreDeDepart.letter, joueur2.lettreDeDepart.letter);
-		if(tour==1) {
-			System.out.println("joueur1 a toi frere");
-		}
-		if(tour==2) {
-			System.out.println("joueur2 a toi frere");
-		}
-		afficherLePotCommun();
-		checkTheWordPotCommun(mot);
-		fichier.checkIfWordCorrect(fichierPath, mot);
-		afficherLePotCommun();
+		
+		DebutDuJeu debutDuJeu = new DebutDuJeu(joueur1, joueur2);
+		debutDuJeu.main();
+		
+		
+		System.out.println("");
+		System.out.println(joueur1.tour);
+		System.out.println(joueur2.tour);
+		//while(joueur1.nbMot==10) {
+			
+		//}
 	}
-
 }

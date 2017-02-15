@@ -15,7 +15,7 @@ public class Fichier {
 		this.fileName = fileName;
 	}
 	
-	public void checkIfWordCorrect(String fichier, String mot) {
+	public int checkIfWordCorrect(String fichier, String mot) {
 		String line = null;
 		int flag=0;
 		mot = mot.toLowerCase();
@@ -34,9 +34,6 @@ public class Fichier {
 						System.out.println("Votre mot est correct");
 					}
 					
-					/*else {
-						System.out.println("Wallah je comprend pas");
-					}*/
 				}
 			}
 			if(flag != 1) {
@@ -48,6 +45,7 @@ public class Fichier {
 		catch (Exception e){
 			System.out.println(e.toString());
 		}
+		return flag;
 	}
 	
 	
