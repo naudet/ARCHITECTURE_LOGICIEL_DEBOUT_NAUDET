@@ -12,15 +12,18 @@ Player joueur2 = new Player(false);
 	public static void remplirLePotCommun (Lettre lettre) {
 		int flag=0;
 		for(int i = 0; i<potCommun.length; i++) {
-			if(potCommun[i] != null && potCommun[i].letter == lettre.letter) {
-				potCommun[i].nombre = lettre.nombre+1;
+			if(potCommun[i] != null && potCommun[i].letter == lettre.letter && flag==0) {
+				potCommun[i].nombre++; 
+				//lettre.nombre++;
 				flag = 1;
+				
 			}
-			if(potCommun[i] == null && flag == 0) {
+			else if(potCommun[i] == null && flag == 0) {
 				potCommun[i] = lettre;
 				potCommun[i].letter = lettre.letter;
 				potCommun[i].nombre = 1;
 				flag = 1;
+				
 			}
 		}
 	}
@@ -110,6 +113,7 @@ Player joueur2 = new Player(false);
 	public static void afficherLePotCommun () {
 		System.out.println("");
 		System.out.println("Voici le pot commun: ");
+		System.out.println("");
 		for(int i=0; i<25; i++) {
 			if(potCommun[i] != null) {
 				if(potCommun[i].nombre > 1) {
@@ -125,20 +129,50 @@ Player joueur2 = new Player(false);
 		}
 	}
 	
-	public void jeu() {
+	public void main() {
 		
-		
-		
+		Lettre lettre = new Lettre('n',1);
+		//Lettre nouvelleLettre = new Lettre('n',1);
+		lettre.tableau();
 		
 		DebutDuJeu debutDuJeu = new DebutDuJeu(joueur1, joueur2);
 		debutDuJeu.main();
 		
 		
-		System.out.println("");
-		System.out.println(joueur1.tour);
-		System.out.println(joueur2.tour);
-		//while(joueur1.nbMot==10) {
+		
+		//System.out.println(joueur1.tour);
+		//System.out.println(joueur2.tour);
+	
+		while(joueur1.nbMot!=10) {
+			System.out.println("");
+			System.out.println("Joueur1 ton score:" + joueur1.nbMot);
+			System.out.println("Joueur2 ton score:" + joueur2.nbMot);
+			System.out.println("");
+			if(joueur1.tour==true) {
 			
-		//}
+				joueur1.tour = false;
+				joueur2.tour = true;
+				System.out.println("");
+				System.out.println("Joueur 2 à toi de jouer");
+				System.out.println("");
+			
+				Piocher2Lettres.piocher2Lettres();
+				SaisirEtVerifierMot sevm = new SaisirEtVerifierMot(joueur1,joueur2);
+				sevm.saisirEtVerifierMot();
+			
+			}
+			else {
+			
+				joueur2.tour=false;
+				joueur1.tour = true;
+				System.out.println("");
+				System.out.println("Joueur1 à toi de jouer");
+				System.out.println("");
+				Piocher2Lettres.piocher2Lettres();
+				SaisirEtVerifierMot sevm = new SaisirEtVerifierMot(joueur1,joueur2);
+				sevm.saisirEtVerifierMot();
+			}
+			
+		}
 	}
 }

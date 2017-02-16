@@ -8,7 +8,7 @@ public class Main {
 		// TODO Auto-generated method stub
 	
 		Game jeu = new Game();
-		jeu.jeu();
+		jeu.main();
 		
 		//System.out.println(easy);
 

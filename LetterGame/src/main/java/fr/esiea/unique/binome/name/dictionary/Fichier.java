@@ -32,6 +32,7 @@ public class Fichier {
 						flag = 1;
 						System.out.println("");
 						System.out.println("Votre mot est correct");
+						System.out.println("");
 					}
 					
 				}
@@ -39,6 +40,7 @@ public class Fichier {
 			if(flag != 1) {
 				System.out.println("");
 				System.out.println("Votre mot n'existe pas");
+				System.out.println("");
 			}
 			br.close(); 
 		}		
