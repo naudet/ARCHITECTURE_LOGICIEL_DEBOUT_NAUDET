@@ -22,6 +22,7 @@ public class SaisirEtVerifierMot {
 		Fichier fichier = new Fichier(fichierPath);
 		
 		System.out.println("");
+		System.out.println("");
 		System.out.println("Veuillez saisir un mot :");
 		
 		sc = new Scanner(System.in);
@@ -29,6 +30,7 @@ public class SaisirEtVerifierMot {
 		int resultPotCommun = Game.checkTheWordPotCommun(mot);
 		int resultDictionary = fichier.checkIfWordCorrect(fichierPath, mot);
 		int resultMotsCommuns = Mots.verifierSiMotDansMotsCommuns(mot);
+		
 		if((resultPotCommun == 1 && resultDictionary == 1) || (resultDictionary == 1 && resultMotsCommuns == 1)) {
 			Game.updatePotCommun(mot);
 			Mots.remplirLeTableauDeMot(mot);
@@ -39,30 +41,20 @@ public class SaisirEtVerifierMot {
 				nouvelleLettre.letter=lettre.getLetter();
 				Game.remplirLePotCommun(nouvelleLettre);
 				Game.afficherLePotCommun();
-				if(joueur1.tour == true) {
-					joueur1.tour = false;
-					joueur2.tour = true;
-				}
-				else {
-					joueur2.tour=false;
-					joueur1.tour = true;
-				}
+				
+				SaisirEtVerifierMot sevm = new SaisirEtVerifierMot(joueur1,joueur2);
+				sevm.saisirEtVerifierMot();
+				
 			}
 			else {
 				joueur2.nbMot++;
 				nouvelleLettre.letter=lettre.getLetter();
 				Game.remplirLePotCommun(nouvelleLettre);
 				Game.afficherLePotCommun();
-				if(joueur1.tour == true) {
-					joueur1.tour = false;
-					joueur2.tour = true;
-				}
-				else {
-					joueur2.tour=false;
-					joueur1.tour = true;
-				}
+				
+				SaisirEtVerifierMot sevm = new SaisirEtVerifierMot(joueur1,joueur2);
+				sevm.saisirEtVerifierMot();
 			}
-			//Game.afficherLePotCommun();
 		}
 		else {
 			Game.afficherLePotCommun();

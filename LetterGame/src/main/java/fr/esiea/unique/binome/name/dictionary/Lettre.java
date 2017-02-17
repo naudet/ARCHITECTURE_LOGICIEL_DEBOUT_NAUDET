@@ -57,20 +57,26 @@ public class Lettre {
 	public int compareLetter(char letter1, char letter2){
 		int coef1=0;
 		int coef2=0;
-		for(int i=0; i<letterTab.length; i++){
-			if(letterTab[i].letter==letter1) {
-				coef1 = i;
-			}
-			else if (letterTab[i].letter==letter2) {
-				coef2 = i;
+		try {
+			for(int i=0; i<letterTab.length; i++){
+				if(letterTab[i].letter==letter1) {
+					coef1 = i;
+				}
+				else if (letterTab[i].letter==letter2) {
+					coef2 = i;
+				}
 			}
 		}
-		if(coef1<= coef2) {
+		catch (Exception e) {
+			System.out.println(e.toString());
+		}
 			
+		if(coef1<= coef2) {
 			return 1;
 		}
 		else {
 			return 2;
 		}
+			
 	}
 }

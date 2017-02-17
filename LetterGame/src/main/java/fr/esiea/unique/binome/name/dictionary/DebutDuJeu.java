@@ -19,7 +19,6 @@ Player joueur2 = new Player(false);
 		joueur1.player = 1;
 		joueur2.player = 2;
 		Lettre lettre = new Lettre('n',1);
-		//Lettre nouvelleLettre = new Lettre('n',1);
 		lettre.tableau();
 		
 	
@@ -45,13 +44,6 @@ Player joueur2 = new Player(false);
 			System.out.println("joueur 2 a toi de commencer");
 			joueur2.tour = true;
 		}
-		
-		/*System.out.println("Piocher 2 lettres: ");
-		nouvelleLettre.letter=lettre.getLetter();
-		Game.remplirLePotCommun(nouvelleLettre);
-		nouvelleLettre.letter=lettre.getLetter();
-		Game.remplirLePotCommun(nouvelleLettre);
-		Game.afficherLePotCommun();*/
 		
 		Piocher2Lettres.piocher2Lettres();
 		SaisirEtVerifierMot sevm = new SaisirEtVerifierMot(joueur1,joueur2);
